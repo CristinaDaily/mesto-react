@@ -24,6 +24,12 @@ function App() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
 
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+  }
+
   return (
     <div className='body'>
       <div className='page'>
@@ -38,6 +44,7 @@ function App() {
           name='profile'
           title='Редактировать профиль'
           isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
         >
           <input
             type='text'
@@ -71,6 +78,7 @@ function App() {
           name='card'
           title='Новое место'
           isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
         >
           <input
             type='text'
@@ -100,6 +108,7 @@ function App() {
           name='avatar'
           title='Обновить аватар'
           isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
         >
           <input
             type='url'
