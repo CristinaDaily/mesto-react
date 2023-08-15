@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Header from './Header.js';
-import Footer from './Footer.js';
-import Main from './Main.js';
-import PopupWithForm from './PopupWithForm.js';
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
+import Main from './Main.jsx';
+import PopupWithForm from './PopupWithForm.jsx';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
