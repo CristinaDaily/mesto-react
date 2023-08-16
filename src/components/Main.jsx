@@ -4,7 +4,7 @@ import api from '../utils/Api';
 import { render } from '@testing-library/react';
 import Card from './Card.jsx';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
@@ -76,6 +76,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
               name={propsData.name}
               likes={propsData.likes.length}
               key={propsData._id}
+              onCardClick={onCardClick}
             />
           ))}
         </section>

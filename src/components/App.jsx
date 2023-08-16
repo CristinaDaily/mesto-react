@@ -4,6 +4,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Main from './Main.jsx';
 import PopupWithForm from './PopupWithForm.jsx';
+import ImagePopup from './ImagePopup.jsx';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -11,6 +12,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
@@ -28,6 +30,12 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setSelectedCard(null);
+  }
+
+  function handleCardClick(cardData) {
+    console.log(cardData);
+    setSelectedCard(cardData);
   }
 
   return (
@@ -38,6 +46,7 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
         <PopupWithForm
@@ -123,6 +132,7 @@ function App() {
             Сохранить
           </button>
         </PopupWithForm>
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
         <div className='popup_type_confirm popup'>
           <div className='popup__container'>

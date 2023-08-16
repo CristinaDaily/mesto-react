@@ -1,10 +1,19 @@
 import React from 'react';
 
-function Card({ link, name, likes }) {
+function Card({ link, name, likes, onCardClick }) {
+  const handleCardClick = () => {
+    onCardClick({ link, name });
+  };
+
   return (
     <article className='element'>
       <div className='element__image-container'>
-        <img className='element__image' src={link} alt={name} />
+        <img
+          className='element__image'
+          src={link}
+          alt={name}
+          onClick={handleCardClick}
+        />
       </div>
       <button type='button' className='element__delete-btn'></button>
       <div className='element__wrapper'>
