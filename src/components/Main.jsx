@@ -2,6 +2,7 @@ import React from 'react';
 import iconEditProfile from '../images/edit-profile.svg';
 import api from '../utils/Api';
 import { render } from '@testing-library/react';
+import Card from './Card.jsx';
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
   const [userName, setUserName] = React.useState('');
@@ -24,7 +25,6 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
     api
       .getInitialCards()
       .then((cardsData) => {
-        console.log(cardsData);
         setCards(cardsData);
       })
       .catch((err) => {
@@ -69,7 +69,16 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
             onClick={onAddPlace}
           ></button>
         </section>
-        <section className='elements'></section>
+        <section className='elements'>
+          {cards.map((propsData) => (
+            <Card
+              link={propsData?.link}
+              name={propsData.name}
+              likes={propsData.likes.length}
+              key={propsData._id}
+            />
+          ))}
+        </section>
       </main>
     </>
   );

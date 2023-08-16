@@ -149,25 +149,6 @@ function App() {
             </form>
           </div>
         </div>
-
-        <template id='element-template'>
-          <article className='element'>
-            <div className='element__image-container'>
-              <img className='element__image' />
-            </div>
-            <button type='button' className='element__delete-btn'></button>
-            <div className='element__wrapper'>
-              <h2 className='element__place-name'></h2>
-              <div className='element__like-container'>
-                <button
-                  type='button'
-                  className='element__like-btn button'
-                ></button>
-                <p className='element__likes-number'></p>
-              </div>
-            </div>
-          </article>
-        </template>
       </div>
     </div>
   );
