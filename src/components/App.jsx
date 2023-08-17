@@ -133,32 +133,6 @@ function App() {
           </button>
         </PopupWithForm>
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-
-        <div className='popup_type_confirm popup'>
-          <div className='popup__container'>
-            <button
-              type='button'
-              aria-label='закрыть'
-              className='popup__close popup__close_type_confirm'
-            ></button>
-            <h2 className='popup__title popup__title_type_confirm'>
-              Вы уверены?
-            </h2>
-            <form
-              className='popup__form popup__form_type_confirm'
-              method='get'
-              name='confirm-card-delete'
-              noValidate
-            >
-              <button
-                type='submit'
-                className='popup__confirm-btn popup__button'
-              >
-                Да
-              </button>
-            </form>
-          </div>
-        </div>
       </div>
     </div>
   );
