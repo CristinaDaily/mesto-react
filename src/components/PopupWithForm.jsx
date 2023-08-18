@@ -15,7 +15,7 @@ function PopupWithForm({ title, name, buttonText, children, isOpen, onClose }) {
         <form
           className={`popup__form popup__form_type_${name}`}
           method='get'
-          name='edit-profile'
+          name={`form-${name}`}
           noValidate
         >
           {children}
