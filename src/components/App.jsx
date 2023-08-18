@@ -54,6 +54,7 @@ function App() {
           title='Редактировать профиль'
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
+          buttonText='Сохранить'
         >
           <input
             type='text'
@@ -79,15 +80,13 @@ function App() {
             maxLength='200'
           />
           <span className='about-input-error popup__error'></span>
-          <button type='submit' className='popup__save-btn popup__button'>
-            Сохранить
-          </button>
         </PopupWithForm>
         <PopupWithForm
           name='card'
           title='Новое место'
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
+          buttonText='Создать'
         >
           <input
             type='text'
@@ -109,15 +108,13 @@ function App() {
             required
           />
           <span className='link-input-error popup__error'></span>
-          <button type='submit' className='popup__button popup__create-btn'>
-            Создать
-          </button>
         </PopupWithForm>
         <PopupWithForm
           name='avatar'
           title='Обновить аватар'
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
+          buttonText='Сохранить'
         >
           <input
             type='url'
@@ -128,9 +125,6 @@ function App() {
             required
           />
           <span className='avatar-input-error popup__error'></span>
-          <button type='submit' className='popup__button popup__save-btn'>
-            Сохранить
-          </button>
         </PopupWithForm>
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </div>
