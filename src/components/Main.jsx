@@ -3,25 +3,14 @@ import iconEditProfile from '../images/edit-profile.svg';
 import api from '../utils/Api';
 import { render } from '@testing-library/react';
 import Card from './Card.jsx';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
 
-  React.useEffect(() => {
-    api
-      .getUserInfo()
-      .then((data) => {
-        setUserName(data.name);
-        setUserDescription(data.about);
-        setUserAvatar(data.avatar);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const currentUser = React.useContext(CurrentUserContext);
 
+  React.useEffect(() => {
     api
       .getInitialCards()
       .then((cardsData) => {
@@ -40,7 +29,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             <img
               className='profile__avatar'
               alt='Фотография'
-              src={userAvatar}
+              src={currentUser.avatar}
             />
             <div className='profile__overlay'>
               <img
@@ -52,7 +41,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             </div>
           </div>
           <div className='profile__info'>
-            <h1 className='profile__name'>{userName}</h1>
+            <h1 className='profile__name'>{currentUser.name}</h1>
             <button
               type='button'
               aria-label='кнопка редактирования'
@@ -60,7 +49,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
               onClick={onEditProfile}
             ></button>
 
-            <p className='profile__occupation'>{userDescription}</p>
+            <p className='profile__occupation'>{currentUser.about}</p>
           </div>
           <button
             type='button'
@@ -74,9 +63,10 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             <Card
               link={propsData?.link}
               name={propsData.name}
-              likes={propsData.likes.length}
+              likes={propsData.likes}
               key={propsData._id}
               onCardClick={onCardClick}
+              cardOwner={propsData.owner._id}
             />
           ))}
         </section>
