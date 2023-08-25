@@ -5,11 +5,19 @@ import { render } from '@testing-library/react';
 import Card from './Card.jsx';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [cards, setCards] = React.useState([]);
+function Main({
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  onLikeClick,
+  onDislikeClick,
+  cards,
+}) {
+  //const [cards, setCards] = React.useState([]);
 
   const currentUser = React.useContext(CurrentUserContext);
-
+  /*
   React.useEffect(() => {
     api
       .getInitialCards()
@@ -19,7 +27,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, []);*/
 
   return (
     <>
@@ -67,6 +75,9 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
               key={propsData._id}
               onCardClick={onCardClick}
               cardOwner={propsData.owner._id}
+              onLikeClick={onLikeClick}
+              id={propsData._id}
+              onDislikeClick={onDislikeClick}
             />
           ))}
         </section>

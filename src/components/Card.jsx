@@ -1,11 +1,24 @@
 import React from 'react';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
-function Card({ link, name, likes, onCardClick, cardOwner }) {
+function Card({
+  link,
+  name,
+  likes,
+  onCardClick,
+  cardOwner,
+  onLikeClick,
+  onDislikeClick,
+  id,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const handleCardClick = () => {
     onCardClick({ link, name });
+  };
+
+  const handleLikeClick = () => {
+    isLiked ? onDislikeClick(id) : onLikeClick(id);
   };
 
   // Определяем, являемся ли currentUser владельцем текущей карточки
@@ -34,6 +47,7 @@ function Card({ link, name, likes, onCardClick, cardOwner }) {
         <div className='element__like-container'>
           <button
             type='button'
+            onClick={handleLikeClick}
             className={`${cardLikeButtonClassName} button`}
           ></button>
           <p className='element__likes-number'>{likes.length}</p>

@@ -16,6 +16,7 @@ function App() {
     React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api
@@ -23,6 +24,15 @@ function App() {
       .then((data) => {
         console.log(data);
         setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    api
+      .getInitialCards()
+      .then((cardsData) => {
+        setCards(cardsData);
       })
       .catch((err) => {
         console.log(err);
@@ -53,6 +63,24 @@ function App() {
     setSelectedCard(cardData);
   }
 
+  function handleCardLike(id) {
+    api.addLike(id).then((newCardData) => {
+      const newCards = cards.map((card) =>
+        card._id === id ? newCardData : card
+      );
+      setCards(newCards);
+    });
+  }
+
+  function handleCardDislike(id) {
+    api.deleteLike(id).then((newCardData) => {
+      const newCards = cards.map((card) =>
+        card._id === id ? newCardData : card
+      );
+      setCards(newCards);
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='body'>
@@ -63,6 +91,9 @@ function App() {
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
             onCardClick={handleCardClick}
+            onLikeClick={handleCardLike}
+            onDislikeClick={handleCardDislike}
+            cards={cards}
           />
           <Footer />
           <PopupWithForm
