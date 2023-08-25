@@ -9,6 +9,7 @@ function Card({
   cardOwner,
   onLikeClick,
   onDislikeClick,
+  onCardDelete,
   id,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -19,6 +20,10 @@ function Card({
 
   const handleLikeClick = () => {
     isLiked ? onDislikeClick(id) : onLikeClick(id);
+  };
+
+  const handleDeleteClick = () => {
+    onCardDelete(id);
   };
 
   // Определяем, являемся ли currentUser владельцем текущей карточки
@@ -41,7 +46,13 @@ function Card({
           onClick={handleCardClick}
         />
       </div>
-      {isOwn && <button type='button' className='element__delete-btn'></button>}
+      {isOwn && (
+        <button
+          type='button'
+          className='element__delete-btn'
+          onClick={handleDeleteClick}
+        ></button>
+      )}
       <div className='element__wrapper'>
         <h2 className='element__place-name'>{name}</h2>
         <div className='element__like-container'>

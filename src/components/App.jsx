@@ -81,6 +81,13 @@ function App() {
     });
   }
 
+  function handleCardDelete(id) {
+    api.deleteCard(id).then(() => {
+      const newCards = cards.filter((card) => card._id !== id);
+      setCards(newCards);
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='body'>
@@ -93,6 +100,7 @@ function App() {
             onCardClick={handleCardClick}
             onLikeClick={handleCardLike}
             onDislikeClick={handleCardDislike}
+            onCardDelete={handleCardDelete}
             cards={cards}
           />
           <Footer />

@@ -12,6 +12,7 @@ function Main({
   onCardClick,
   onLikeClick,
   onDislikeClick,
+  onCardDelete,
   cards,
 }) {
   //const [cards, setCards] = React.useState([]);
@@ -78,6 +79,7 @@ function Main({
               onLikeClick={onLikeClick}
               id={propsData._id}
               onDislikeClick={onDislikeClick}
+              onCardDelete={onCardDelete}
             />
           ))}
         </section>
