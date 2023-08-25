@@ -5,6 +5,7 @@ import Footer from './Footer.jsx';
 import Main from './Main.jsx';
 import PopupWithForm from './PopupWithForm.jsx';
 import ImagePopup from './ImagePopup.jsx';
+import EditProfilePopup from './EditProfilePopup.jsx';
 import api from '../utils/Api';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 
@@ -64,27 +65,49 @@ function App() {
   }
 
   function handleCardLike(id) {
-    api.addLike(id).then((newCardData) => {
-      const newCards = cards.map((card) =>
-        card._id === id ? newCardData : card
-      );
-      setCards(newCards);
-    });
+    api
+      .addLike(id)
+      .then((newCardData) => {
+        const newCards = cards.map((card) =>
+          card._id === id ? newCardData : card
+        );
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(`Handle like error:${err}`);
+      });
   }
 
   function handleCardDislike(id) {
-    api.deleteLike(id).then((newCardData) => {
-      const newCards = cards.map((card) =>
-        card._id === id ? newCardData : card
-      );
-      setCards(newCards);
-    });
+    api
+      .deleteLike(id)
+      .then((newCardData) => {
+        const newCards = cards.map((card) =>
+          card._id === id ? newCardData : card
+        );
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(`Handle dislike error:${err}`);
+      });
   }
 
   function handleCardDelete(id) {
-    api.deleteCard(id).then(() => {
-      const newCards = cards.filter((card) => card._id !== id);
-      setCards(newCards);
+    api
+      .deleteCard(id)
+      .then(() => {
+        const newCards = cards.filter((card) => card._id !== id);
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(`Delete card error:${err}`);
+      });
+  }
+
+  function handleUpdateUser({ name, about }) {
+    api.editProfile({ name, about }).then((newUserInfo) => {
+      setCurrentUser(newUserInfo);
+      closeAllPopups();
     });
   }
 
@@ -104,38 +127,11 @@ function App() {
             cards={cards}
           />
           <Footer />
-          <PopupWithForm
-            name='profile'
-            title='Редактировать профиль'
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
-            buttonText='Сохранить'
-          >
-            <input
-              type='text'
-              name='name'
-              defaultValue='Жак-Ив Кусто'
-              placeholder='Имя'
-              className='popup__input popup__input_type_name'
-              id='name-input'
-              required
-              minLength='2'
-              maxLength='40'
-            />
-            <span className='name-input-error popup__error'></span>
-            <input
-              type='text'
-              name='about'
-              defaultValue='Исследователь океана'
-              placeholder='o себе'
-              className='popup__input popup__input_type_about'
-              id='about-input'
-              required
-              minLength='2'
-              maxLength='200'
-            />
-            <span className='about-input-error popup__error'></span>
-          </PopupWithForm>
+            onUpdateUser={handleUpdateUser}
+          />
           <PopupWithForm
             name='card'
             title='Новое место'

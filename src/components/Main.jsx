@@ -15,20 +15,7 @@ function Main({
   onCardDelete,
   cards,
 }) {
-  //const [cards, setCards] = React.useState([]);
-
   const currentUser = React.useContext(CurrentUserContext);
-  /*
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((cardsData) => {
-        setCards(cardsData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);*/
 
   return (
     <>
