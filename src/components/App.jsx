@@ -7,6 +7,7 @@ import PopupWithForm from './PopupWithForm.jsx';
 import ImagePopup from './ImagePopup.jsx';
 import EditProfilePopup from './EditProfilePopup.jsx';
 import EditAvatarPopup from './EditAvatarPopup.jsx';
+import AddPlacePopup from './AddPlacePopup.jsx';
 import api from '../utils/Api';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 
@@ -125,8 +126,15 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => {
-        comsole.log(`Avatar update err:${err}`);
+        console.log(`Avatar update err:${err}`);
       });
+  }
+
+  function handleAddPlaceSubmit({ link, name }) {
+    api.addNewCard({ link, name }).then((newCardData) => {
+      setCards([newCardData, ...cards]);
+      closeAllPopups();
+    });
   }
 
   return (
@@ -150,34 +158,12 @@ function App() {
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
-          <PopupWithForm
-            name='card'
-            title='Новое место'
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-            buttonText='Создать'
-          >
-            <input
-              type='text'
-              name='name'
-              placeholder='Название'
-              className='popup__input popup__input_type_place'
-              id='place-input'
-              required
-              minLength='2'
-              maxLength='30'
-            />
-            <span className='place-input-error popup__error'></span>
-            <input
-              type='url'
-              name='link'
-              placeholder='Ссылка на картинку'
-              className='popup__input popup__input_type_link'
-              id='link-input'
-              required
-            />
-            <span className='link-input-error popup__error'></span>
-          </PopupWithForm>
+            onAddPlace={handleAddPlaceSubmit}
+          ></AddPlacePopup>
+
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
