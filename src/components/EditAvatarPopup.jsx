@@ -10,6 +10,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     onUpdateAvatar({
       avatar: avatarLinkRef.current.value,
     });
+    avatarLinkRef.current.value = '';
   }
   return (
     <PopupWithForm
