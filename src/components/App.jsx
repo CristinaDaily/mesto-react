@@ -3,7 +3,6 @@ import React from 'react';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Main from './Main.jsx';
-import PopupWithForm from './PopupWithForm.jsx';
 import ImagePopup from './ImagePopup.jsx';
 import EditProfilePopup from './EditProfilePopup.jsx';
 import EditAvatarPopup from './EditAvatarPopup.jsx';
@@ -25,7 +24,6 @@ function App() {
     api
       .getUserInfo()
       .then((data) => {
-        console.log(data);
         setCurrentUser(data);
       })
       .catch((err) => {
@@ -62,7 +60,6 @@ function App() {
   }
 
   function handleCardClick(cardData) {
-    console.log(cardData);
     setSelectedCard(cardData);
   }
 
