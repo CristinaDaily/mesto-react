@@ -11,6 +11,10 @@ class Api {
     return Promise.reject(`Error:${res.status}`);
   }
 
+  getAppInfo() {
+    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+  }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,

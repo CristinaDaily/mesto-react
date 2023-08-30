@@ -25,22 +25,12 @@ function App() {
 
   React.useEffect(() => {
     api
-      .getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    api
-      .getInitialCards()
-      .then((cardsData) => {
+      .getAppInfo()
+      .then(([cardsData, userData]) => {
         setCards(cardsData);
+        setCurrentUser(userData);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   }, []);
 
   function handleEditProfileClick() {
@@ -101,10 +91,13 @@ function App() {
   function handleCardDelete(id) {
     api
       .deleteCard(id)
-      .then(() => {
-        const newCards = cards.filter((card) => card._id !== id);
-        setCards(newCards);
-        closeAllPopups();
+      .then((res) => {
+        if (res.ok) {
+          setCards((state) => state.filter((card) => card._id !== id));
+          closeAllPopups();
+        } else {
+          throw new Error(`Delete card error:: ${res.status}`);
+        }
       })
       .catch((err) => {
         console.log(`Delete card error:${err}`);
