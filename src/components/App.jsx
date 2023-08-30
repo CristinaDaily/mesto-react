@@ -71,10 +71,9 @@ function App() {
     api
       .addLike(id)
       .then((newCardData) => {
-        const newCards = cards.map((card) =>
-          card._id === id ? newCardData : card
+        setCards((state) =>
+          state.map((card) => (card._id === id ? newCardData : card))
         );
-        setCards(newCards);
       })
       .catch((err) => {
         console.log(`Handle like error:${err}`);
@@ -85,10 +84,9 @@ function App() {
     api
       .deleteLike(id)
       .then((newCardData) => {
-        const newCards = cards.map((card) =>
-          card._id === id ? newCardData : card
+        setCards((state) =>
+          state.map((card) => (card._id === id ? newCardData : card))
         );
-        setCards(newCards);
       })
       .catch((err) => {
         console.log(`Handle dislike error:${err}`);
