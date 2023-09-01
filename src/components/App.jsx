@@ -92,12 +92,12 @@ function App() {
     api
       .deleteCard(id)
       .then((res) => {
-        if (res.ok) {
-          setCards((state) => state.filter((card) => card._id !== id));
-          closeAllPopups();
-        } else {
-          throw new Error(`Delete card error:: ${res.status}`);
-        }
+        //if (res.ok) {
+        setCards((state) => state.filter((card) => card._id !== id));
+        closeAllPopups();
+        //} else {
+        //  throw new Error(`Delete card error:: ${res.status}`);
+        //}
       })
       .catch((err) => {
         console.log(`Delete card error:${err}`);
