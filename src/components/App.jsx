@@ -129,10 +129,15 @@ function App() {
   }
 
   function handleAddPlaceSubmit({ link, name }) {
-    api.addNewCard({ link, name }).then((newCardData) => {
-      setCards([newCardData, ...cards]);
-      closeAllPopups();
-    });
+    api
+      .addNewCard({ link, name })
+      .then((newCardData) => {
+        setCards([newCardData, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Add place confirmation error:${err}`);
+      });
   }
 
   return (
