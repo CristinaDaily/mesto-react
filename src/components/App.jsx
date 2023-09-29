@@ -29,6 +29,8 @@ function App() {
       .then(([cardsData, userData]) => {
         setCards(cardsData);
         setCurrentUser(userData);
+        console.log(cardsData)
+        console.log(userData)
       })
       .catch((err) => console.log(err));
   }, []);
